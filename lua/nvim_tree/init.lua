@@ -19,12 +19,17 @@ g.nvim_tree_highlight_opened_files = true
 
 -- toggle nvim-tree
 keymap.map('n', '<C-n>', ':NvimTreeToggle<CR>')
+-- refresh
+keymap.map('n', '<Leader>r', ':NvimTreeRefresh<CR>')
+-- find file
+keymap.map('n', '<Leader>n', ':NvimTreeFindFile<CR>')
 
 -- nvim-tree callback
 local list = {
-    { key = '<C-s>', cb = tree_cb('split') },
-    { key = '<C-v>', cb = tree_cb('vsplit') },
-    { key = '<C-t>', cb = tree_cb('tabnew') },
+    { key = 's', cb = tree_cb('split') },
+    { key = 'v', cb = tree_cb('vsplit') },
+    { key = 't', cb = tree_cb('tabnew') },
+    { key = '?', cb = tree_cb('toggle_help') },
 }
 
 return list
