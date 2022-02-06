@@ -9,5 +9,8 @@ require'nvim-treesitter'.setup {
         enable = true,
         use_languagetree = true,
     },
+    indent = {
+        enable = true,
+    },
 }
 

@@ -137,6 +137,9 @@ require'autocmp'
 -- treesitter
 require'treesitter_conf'
 
+-- neoscroll
+require'scroll_conf'
+
 
 -- custom keymap
 
