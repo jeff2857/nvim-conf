@@ -9,7 +9,9 @@ end
 lsp.tsserver.setup {}
 
 -- load solidity language server
-lsp.solc.setup {}
+--if lsp.solc then
+    --lsp.solc.setup {}
+--end
 
 -- load rust language server
 lsp.rust_analyzer.setup {}

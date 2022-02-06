@@ -11,8 +11,10 @@ local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    cmd 'packadd packer.nvim'
 end
+
+-- use packer.nvim as plugin manager
+cmd [[packadd packer.nvim]]
 
 
 -- auto source nvim config
@@ -110,14 +112,19 @@ g.gruvbox_material_palette = {
     grey2 = {'#a89984', '246'},
     none = {'NONE', 'NONE'}
 }
-cmd[[colorscheme gruvbox-material]]
+
+--[[ this need to be repaired
+local present, gruvboxScheme = pcall(require, 'gruvbox-material')
+if present then
+    cmd'colorscheme gruvbox-material'
+end
+]]--
+
+cmd'colorscheme gruvbox-material'
+
 
 -- statusline
 -- opt.laststatus = 2
-
-
--- plugins
-cmd [[packadd packer.nvim]]
 
 
 -- plugin configurations
@@ -209,6 +216,9 @@ packer.startup(function ()
 
     use {
         'karb94/neoscroll.nvim',
+        config = function()
+            require'neoscroll'.setup()
+        end
     }
 
     -- treesitter

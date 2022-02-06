@@ -1,3 +1,5 @@
+Note: The following step is not required.
+
 First, you need to add `packer.nvim`
 
 ```
