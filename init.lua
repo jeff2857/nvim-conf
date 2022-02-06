@@ -3,6 +3,7 @@ local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 local exec = vim.api.nvim_exec
+local wo = vim.wo
 
 
 -- install packer.nvim
@@ -38,6 +39,9 @@ opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.expandtab = true
+opt.autoindent = true
+-- no word wrap
+wo.wrap = false
 
 -- highlight line and column
 opt.cursorcolumn = true
@@ -49,6 +53,18 @@ opt.guicursor = 'a:block'
 -- minimal number of screen lines to keep above and below the cursor
 opt.scrolloff = 3
 
+opt.hidden = true
+opt.swapfile = false
+opt.wildmenu = true
+opt.lazyredraw = true
+opt.synmaxcol = 240
+
+-- search
+opt.ignorecase = true
+
+-- split
+opt.splitbelow = true
+opt.splitright = true
 
 -- color scheme
 --cmd[[colorscheme gruvbox-material]]
