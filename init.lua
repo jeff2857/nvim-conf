@@ -71,6 +71,7 @@ opt.splitright = true
 -- color scheme
 --cmd[[colorscheme gruvbox-material]]
 --require'mycolor'
+--[[
 g.gruvbox_material_background = 'hard'
 g.gruvbox_material_enable_italic = 1
 g.gruvbox_material_disable_italic_comment = 0
@@ -88,7 +89,7 @@ g.gruvbox_material_palette = {
     bg_statusline2 = {'#32302f', '235'},
     bg_statusline3 = {'#504945', '239'},
     bg_diff_green = {'#32361a', '22'},
-    bg_visual_green = {'#333e34', '22'},
+    bg_visual_green = {'#335e34', '22'},
     bg_diff_red = {'#3c1f1e', '52'},
     bg_visual_red = {'#442e2d', '52'},
     bg_diff_blue = {'#0d3138', '17'},
@@ -112,6 +113,7 @@ g.gruvbox_material_palette = {
     grey2 = {'#a89984', '246'},
     none = {'NONE', 'NONE'}
 }
+]]--
 
 --[[ this need to be repaired
 local present, gruvboxScheme = pcall(require, 'gruvbox-material')
@@ -120,7 +122,13 @@ if present then
 end
 ]]--
 
-cmd'colorscheme gruvbox-material'
+--cmd'colorscheme gruvbox-material'
+
+-- colorscheme sonokai
+-- available style: default, atlantis, andromeda, shusia, maia, espresso
+g.sonokai_style = 'maia'
+g.sonokai_enable = 1
+cmd[[colorscheme sonokai]]
 
 
 -- statusline
@@ -191,7 +199,7 @@ packer.startup(function ()
         config = function()
             require'lualine'.setup {
                 options = {
-                    theme = 'gruvbox-material'
+                    theme = 'sonokai'
                 }
             }
         end
@@ -207,6 +215,12 @@ packer.startup(function ()
         'sainnhe/gruvbox-material',
         config = function()
             --cmd[[colorscheme gruvbox-material]]
+        end
+    }
+
+    use {
+        'sainnhe/sonokai',
+        config = function()
         end
     }
 
