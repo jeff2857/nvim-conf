@@ -285,4 +285,13 @@ packer.startup(function ()
         'tomlion/vim-solidity',
     }
 
+    -- tabline
+    use {
+        'alvarosevilla95/luatab.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            require'luatab'.setup {}
+        end,
+    }
+
 end)

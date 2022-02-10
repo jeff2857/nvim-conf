@@ -19,3 +19,6 @@ keymap.map('n', '<Leader>8', '8gt')
 keymap.map('n', '<Leader>9', '9gt')
 keymap.map('n', '<Leader>0', ':tablast<CR>')
 
+-- quit
+keymap.map('n', '<Leader>q', ':q<CR>')
+
