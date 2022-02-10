@@ -127,6 +127,8 @@ packer.startup(function ()
         config = function()
             require 'nvim-tree'.setup {
                 view = {
+                    hide_root_folder = true,
+                    auto_resize = true,
                     mappings = {
                         list = require'nvim_tree'
                     }

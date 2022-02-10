@@ -11,9 +11,13 @@ local g = vim.g
 
 
 g.nvim_tree_quit_on_open = 1
-g.nvim_tree_indent_markers = true
-g.nvim_tree_git_hl = true
-g.nvim_tree_highlight_opened_files = true
+g.nvim_tree_indent_markers = 1
+g.nvim_tree_git_hl = 1
+g.nvim_tree_highlight_opened_files = 1
+g.nvim_tree_root_folder_modifier = ':~'
+g.nvim_tree_disable_window_picker = 1
+g.nvim_tree_group_empty = 1
+g.nvim_tree_respect_buf_cwd = 1
 
 -- key bindings
 
