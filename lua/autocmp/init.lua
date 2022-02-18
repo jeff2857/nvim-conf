@@ -10,12 +10,28 @@ if not present then
     return
 end
 
-vim.opt.completeopt = 'menuone,noselect'
+local present, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
+if not present then
+    return
+end
+
+local present, lspconfig = pcall(require, 'lspconfig')
+if not present then
+    return
+end
+
+local present, luasnip = pcall(require, 'luasnip')
+if not present then
+    return
+end
+
+
+vim.opt.completeopt = 'menuone,noinsert,noselect'
 
 cmp.setup {
     snippet = {
         expand = function(args)
-            require'luasnip'.lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     formatting = {
@@ -43,8 +59,8 @@ cmp.setup {
         ['<Tab>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif require('luasnip').expand_or_jumpable() then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
             end
@@ -52,8 +68,8 @@ cmp.setup {
         ['<S-Tab>'] = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif require('luasnip').jumpable(-1) then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
@@ -65,10 +81,11 @@ cmp.setup {
         {name = 'buffer'},
         {name = 'nvim_lua'},
         {name = 'path'},
+        {name = 'nvim_lsp_signature_help'},
     },
 }
 
-local luasnip = require'luasnip'
+
 luasnip.config.set_config {
     history = true,
     updateevents = 'TextChanged,TextChangedI',

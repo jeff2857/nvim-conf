@@ -153,7 +153,7 @@ packer.startup(function ()
 
     -- lsp
     use {
-        'neovim/nvim-lspconfig'
+        'neovim/nvim-lspconfig',
     }
 
     -- color scheme
@@ -185,11 +185,6 @@ packer.startup(function ()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-    }
-
-    -- lspsaga
-    use {
-        'glepnir/lspsaga.nvim'
     }
 
     -- Java language server
@@ -257,7 +252,6 @@ packer.startup(function ()
 
     use {
         'hrsh7th/nvim-cmp',
-        --after = 'friendly-snippets',
     }
 
     use {
