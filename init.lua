@@ -130,7 +130,7 @@ packer.startup(function ()
                     hide_root_folder = true,
                     auto_resize = true,
                     mappings = {
-                        list = require'nvim_tree'
+                        --list = require'nvim_tree'
                     }
                 }
             }
