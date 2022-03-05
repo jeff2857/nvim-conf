@@ -21,4 +21,6 @@ keymap.map('n', '<Leader>0', ':tablast<CR>')
 
 -- quit
 keymap.map('n', '<Leader>q', ':q<CR>')
+-- write buffer
+keymap.map('n', '<Leader>w', ':w<CR>')
 

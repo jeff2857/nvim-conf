@@ -126,6 +126,8 @@ packer.startup(function ()
         },
         config = function()
             require 'nvim-tree'.setup {
+                open_on_tab = true,
+                hijack_cursor = true,
                 view = {
                     hide_root_folder = true,
                     auto_resize = true,
