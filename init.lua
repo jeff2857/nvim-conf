@@ -134,6 +134,19 @@ packer.startup(function ()
                     mappings = {
                         --list = require'nvim_tree'
                     }
+                },
+                renderer = {
+                    indent_markers = {
+                        enabled = false,
+                    },
+                },
+                actions = {
+                    open_file = {
+                        quit_on_open = false,
+                        window_picker = {
+                            enabled = false,
+                        },
+                    }
                 }
             }
         end
@@ -156,6 +169,10 @@ packer.startup(function ()
     -- lsp
     use {
         'neovim/nvim-lspconfig',
+    }
+
+    use {
+        'RRethy/vim-illuminate',
     }
 
     -- color scheme
