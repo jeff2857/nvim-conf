@@ -137,14 +137,14 @@ packer.startup(function ()
                 },
                 renderer = {
                     indent_markers = {
-                        enabled = false,
+                        enable = false,
                     },
                 },
                 actions = {
                     open_file = {
                         quit_on_open = false,
                         window_picker = {
-                            enabled = false,
+                            enable = false,
                         },
                     }
                 }
@@ -177,20 +177,9 @@ packer.startup(function ()
 
     -- color scheme
     use {
-        'sainnhe/gruvbox-material',
-        config = function()
-            --cmd[[colorscheme gruvbox-material]]
-        end
-    }
-
-    use {
         'sainnhe/sonokai',
         config = function()
         end
-    }
-
-    use {
-        'bluz71/vim-moonfly-colors'
     }
 
     use {
