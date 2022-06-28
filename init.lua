@@ -128,9 +128,9 @@ packer.startup(function ()
             require 'nvim-tree'.setup {
                 open_on_tab = true,
                 hijack_cursor = true,
+                respect_buf_cwd = true,
                 view = {
                     hide_root_folder = true,
-                    auto_resize = true,
                     mappings = {
                         --list = require'nvim_tree'
                     }
@@ -139,6 +139,24 @@ packer.startup(function ()
                     indent_markers = {
                         enable = false,
                     },
+                    highlight_git = true,
+                    highlight_opened_files = 'all',
+                    root_folder_modifier = ':p:.',
+                    group_empty = true,
+                    icons = {
+                        show = {
+                            git = false,
+                            folder = true,
+                            file = false,
+                            folder_arrow = true,
+                        },
+                        glyphs = {
+                            folder = {
+                                arrow_open = '',
+                                arrow_closed = '',
+                            },
+                        },
+                    },
                 },
                 actions = {
                     open_file = {
@@ -146,6 +164,7 @@ packer.startup(function ()
                         window_picker = {
                             enable = false,
                         },
+                        resize_window = true,
                     }
                 }
             }
