@@ -52,6 +52,7 @@ opt.cursorline = true
 -- cursor shape
 opt.guicursor = 'a:block'
 
+opt.mouse = 'a'
 -- minimal number of screen lines to keep above and below the cursor
 opt.scrolloff = 3
 
