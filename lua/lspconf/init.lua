@@ -68,6 +68,7 @@ vim.cmd [[ autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, 
 local capabilities = vim.lsp.protocol.make_client_capabilities();
 capabilities = cmp_lsp.update_capabilities(capabilities);
 
+vim.cmd [[ autocmd! BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200) ]]
 
 -- lsp keymap
 
