@@ -100,6 +100,8 @@ require'treesitter_conf'
 -- neoscroll
 require'scroll_conf'
 
+-- status
+require'status_conf'
 
 -- custom keymap
 
@@ -195,6 +197,13 @@ packer.startup(function ()
         'RRethy/vim-illuminate',
     }
 
+    -- lsp status
+    use {
+        'nvim-lua/lsp-status.nvim',
+        config = function()
+        end
+    }
+
     -- color scheme
     use {
         'sainnhe/sonokai',
@@ -213,11 +222,6 @@ packer.startup(function ()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-    }
-
-    -- Java language server
-    use {
-        'mfussenegger/nvim-jdtls'
     }
 
     -- gitsigns

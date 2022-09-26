@@ -24,3 +24,5 @@ keymap.map('n', '<Leader>q', ':q<CR>')
 -- write buffer
 keymap.map('n', '<Leader>w', ':w<CR>')
 
+-- copy to clipboard
+keymap.map('v', '<Leader>y', '"+y')
