@@ -71,10 +71,11 @@ opt.splitright = true
 
 -- color scheme
 -- available style: default, atlantis, andromeda, shusia, maia, espresso
-g.sonokai_style = 'maia'
-g.sonokai_enable = 1
-cmd[[silent! colorscheme sonokai]]
+--g.sonokai_style = 'maia'
+--g.sonokai_enable = 1
+--cmd[[silent! colorscheme sonokai]]
 
+require'colorscheme_conf'
 
 -- statusline
 -- opt.laststatus = 2
@@ -207,8 +208,22 @@ packer.startup(function ()
     -- color scheme
     use {
         'sainnhe/sonokai',
-        config = function()
-        end
+    }
+
+    use {
+        'projekt0n/github-nvim-theme',
+    }
+
+    use {
+        'maxmellon/vim-jsx-pretty'
+    }
+
+    use {
+        'lewpoly/sherbet.nvim',
+    }
+
+    use {
+        'sainnhe/gruvbox-material',
     }
 
     use {

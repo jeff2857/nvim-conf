@@ -132,16 +132,27 @@ for _, lsp in pairs(servers) do
 end
 
 -- solidity
-lspconfig['solc'].setup{
+--lspconfig['solc'].setup{
+    --on_attach = on_attach,
+    --flags = {
+        --debounce_text_changes = 150,
+    --},
+    --cmd = {'solc', '--lsp'},
+    --init_options = {hostInfo = "neovim"},
+    --filetypes = {"solidity"},
+    --root_dir = lspconfig.util.root_pattern('hardhat.config.*', '.git'),
+--}
+
+lspconfig['solidity_ls'].setup{
     on_attach = on_attach,
     flags = {
         debounce_text_changes = 150,
     },
-    cmd = {'solc', '--lsp'},
-    init_options = {hostInfo = "neovim"},
-    filetypes = {"solidity"},
-    root_dir = lspconfig.util.root_pattern('hardhat.config.*', '.git'),
+    cmd = {'solidity-language-server', '--stdio'},
+    filetypes = {'solidity'},
+    root_dir = lspconfig.util.root_pattern('package.json', '.git'),
 }
+
 lspconfig['tsserver'].setup{
     on_attach = on_attach,
     flags = {
