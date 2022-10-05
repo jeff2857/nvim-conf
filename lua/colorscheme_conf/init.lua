@@ -53,5 +53,5 @@ function loadColorScheme (scheme)
     end
 end
 
-loadColorScheme'sonokai'
+loadColorScheme'github'
 
