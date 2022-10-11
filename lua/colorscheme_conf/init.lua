@@ -57,6 +57,30 @@ function loadOneNvim()
     vim.cmd[[silent! colorscheme one-nvim]]
 end
 
+function loadOnedark()
+    local present, onedark = pcall(require, 'onedark')
+    if not present then
+        return
+    end
+
+    onedark.setup{
+        style = 'dark',
+        code_style = {
+            comments = 'italic',
+            functions = 'italic'
+        },
+        colors = {
+            bg0 = '#24292e',
+            red = '#e88388',
+            dark_red = '#e06c75',
+        },
+        highlights = {
+            TSFunction = {fmt = 'italic'}
+        }
+    }
+    onedark.load()
+end
+
 function loadColorScheme (scheme)
     if scheme == 'github' then
         loadGithubTheme()
@@ -68,10 +92,12 @@ function loadColorScheme (scheme)
         loadGruvbox() 
     elseif scheme == 'onenvim' then
         loadOneNvim()
+    elseif scheme == 'onedark' then
+        loadOnedark()
     else
         loadBlueMoon()
     end
 end
 
-loadColorScheme'onenvim'
+loadColorScheme'onedark'
 
