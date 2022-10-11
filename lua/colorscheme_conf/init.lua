@@ -33,12 +33,28 @@ function loadSonokai ()
 end
 
 function loadGruvbox ()
-    vim.g.gruvbox_material_background = 'hard'
-    vim.g.gruvbox_material_enable_bold = 1
-    vim.g.gruvbox_material_enable_italic = 1
-    vim.g.gruvbox_material_ui_contrast = 'high'
-    vim.g.gruvbox_material_better_performance = 1
+    vim.cmd[[set background=dark]]
+    vim.cmd[[let g:gruvbox_material_background = 'dark']]
+    vim.cmd[[let g:gruvbox_material_foreground = 'original']]
+    vim.cmd[[let g:gruvbox_material_better_performance = 1]]
+    vim.cmd[[let g:gruvbox_material_enable_bold = 1]]
+    vim.cmd[[let g:gruvbox_material_enable_italic = 1]]
+    vim.cmd[[let g:gruvbox_material_ui_contrast = 'high']]
+    vim.cmd[[let g:gruvbox_material_visual = 'reverse']]
+    vim.cmd[[let g:gruvbox_material_sign_column_background = 'grey']]
+    vim.cmd[[let g:gruvbox_material_diagnostic_text_highlight = 1]]
+    vim.cmd[[let g:gruvbox_material_diagnostic_line_highlight = 1]]
+    vim.cmd[[let g:gruvbox_material_diagnostic_virtual_text = 'colored']]
+    vim.cmd[[let g:gruvbox_material_colors_override = {'bg0': ['#24292e', 'NONE'], 'bg2': ['#1f2428', 'NONE']}]]
     vim.cmd[[silent! colorscheme gruvbox-material]]
+end
+
+function loadBlueMoon()
+    vim.cmd[[silent! colorscheme blue-moon]]
+end
+
+function loadOneNvim()
+    vim.cmd[[silent! colorscheme one-nvim]]
 end
 
 function loadColorScheme (scheme)
@@ -50,8 +66,12 @@ function loadColorScheme (scheme)
         loadSonokai()
     elseif scheme == 'gruvbox' then
         loadGruvbox() 
+    elseif scheme == 'onenvim' then
+        loadOneNvim()
+    else
+        loadBlueMoon()
     end
 end
 
-loadColorScheme'github'
+loadColorScheme'onenvim'
 

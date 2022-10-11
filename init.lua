@@ -227,6 +227,14 @@ packer.startup(function ()
     }
 
     use {
+        'Th3Whit3Wolf/one-nvim',
+    }
+
+    use {
+        'kyazdani42/blue-moon'
+    }
+
+    use {
         'karb94/neoscroll.nvim',
         config = function()
             require'neoscroll'.setup()
