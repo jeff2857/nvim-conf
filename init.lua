@@ -69,19 +69,14 @@ opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
 
--- color scheme
--- available style: default, atlantis, andromeda, shusia, maia, espresso
---g.sonokai_style = 'maia'
---g.sonokai_enable = 1
---cmd[[silent! colorscheme sonokai]]
-
-require'colorscheme_conf'
-
 -- statusline
 -- opt.laststatus = 2
 
 
 -- plugin configurations
+
+-- colorscheme
+require'colorscheme_conf'
 
 -- nvim-tree
 require'nvim_tree'
@@ -194,6 +189,7 @@ packer.startup(function ()
         'neovim/nvim-lspconfig',
     }
 
+    -- highlight other uses of the word under the cursor
     use {
         'RRethy/vim-illuminate',
     }
@@ -202,6 +198,20 @@ packer.startup(function ()
     use {
         'nvim-lua/lsp-status.nvim',
         config = function()
+            local lsp_status = require'lsp-status'
+            local lspconfig = require'lspconfig'
+
+            lsp_status.register_progress()
+
+            lspconfig.rust_analyzer.setup({
+                on_attach = lsp_status.on_attach,
+                capabilities = lsp_status.capabilities
+            })
+
+            lspconfig.tsserver.setup({
+                on_attach = lsp_status.on_attach,
+                capabilities = lsp_status.capabilities
+            })
         end
     }
 
