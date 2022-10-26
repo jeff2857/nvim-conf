@@ -37,9 +37,9 @@ opt.number = true
 opt.relativenumber = true
 
 -- indent
-opt.shiftwidth = 4
-opt.tabstop = 4
-opt.softtabstop = 4
+opt.shiftwidth = 2
+opt.tabstop = 2
+opt.softtabstop = 2
 opt.expandtab = true
 opt.autoindent = true
 -- no word wrap
@@ -95,9 +95,6 @@ require'treesitter_conf'
 
 -- neoscroll
 require'scroll_conf'
-
--- status
-require'status_conf'
 
 -- custom keymap
 
@@ -178,11 +175,16 @@ packer.startup(function ()
         config = function()
             require'lualine'.setup {
                 options = {
-                    theme = 'sonokai'
+                    theme = 'onedark'
+                },
+                sections = {
+                    lualine_c = {'filename', 'lsp_progress'}
                 }
             }
         end
     }
+
+    use 'arkav/lualine-lsp-progress'
 
     -- lsp
     use {
@@ -193,28 +195,6 @@ packer.startup(function ()
     use {
         'RRethy/vim-illuminate',
     }
-
-    -- lsp status
-    use {
-        'nvim-lua/lsp-status.nvim',
-        config = function()
-            local lsp_status = require'lsp-status'
-            local lspconfig = require'lspconfig'
-
-            lsp_status.register_progress()
-
-            lspconfig.rust_analyzer.setup({
-                on_attach = lsp_status.on_attach,
-                capabilities = lsp_status.capabilities
-            })
-
-            lspconfig.tsserver.setup({
-                on_attach = lsp_status.on_attach,
-                capabilities = lsp_status.capabilities
-            })
-        end
-    }
-
     -- color scheme
     use {
         'sainnhe/sonokai',

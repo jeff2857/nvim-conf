@@ -72,15 +72,15 @@ vim.cmd [[ autocmd! BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200) ]
 
 -- lsp keymap
 
-local keymap = require'utils.keymap'
-
-
-keymap.map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-keymap.map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-keymap.map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>')
-keymap.map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>')
+local keymap = vim.keymap
 
 local opts = { silent = true, noremap = true }
+
+keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+keymap.set('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>')
+keymap.set('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>')
+
 
 local function on_attach(client, bufnr)
     -- highlight symbol under cursor
@@ -90,46 +90,46 @@ local function on_attach(client, bufnr)
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
 
-    api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+    keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    keymap.set('n', 'gs', vim.lsp.buf.signature_help, bufopts)
+    keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
+    keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    keymap.set('n', 'gf', vim.lsp.buf.formatting, bufopts)
+    keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
+    keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
+    keymap.set('n', '<leader>e', vim.diagnostic.open_float, bufopts)
+    keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     api.nvim_buf_set_keymap(bufnr, 'n', '<leader>i', '<cmd>LspInfo<CR>', opts)
 end
 
 
 -- load lsp servers
-local servers = { 'rust_analyzer' }
-for _, lsp in pairs(servers) do
-    lspconfig[lsp].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = {
-            debounce_text_changes = 150,
-        },
-        settings = {
-            ["rust-analyzer"] = {
-                assist = {
-                    importGranularity = 'module',
-                    importPrefix = 'self',
-                },
-                cargo = {
-                    loadOutDirsFromCheck = true,
-                },
-                procMacro = {
-                    enable = true,
-                },
-            }
+-- rust
+lspconfig['rust_analyzer'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importGranularity = 'module',
+                importPrefix = 'self',
+            },
+            cargo = {
+                loadOutDirsFromCheck = true,
+            },
+            procMacro = {
+                enable = true,
+            },
         }
     }
-end
+}
 
 -- solidity
 --lspconfig['solc'].setup{
