@@ -69,6 +69,15 @@ opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
 
+-- autocomplete
+opt.completeopt = {'menuone', 'noselect', 'noinsert'}
+
+vim.cmd([[
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focusable = false})
+]])
+
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- statusline
 -- opt.laststatus = 2
 
@@ -113,6 +122,19 @@ packer.init()
 packer.startup(function ()
     -- packer manage itself
     use 'wbthomason/packer.nvim'
+
+    use {
+      'williamboman/mason.nvim',
+      config = function()
+        require'mason'.setup()
+      end
+    }
+    use {
+      'williamboman/mason-lspconfig.nvim',
+      config = function()
+        require'mason-lspconfig'.setup()
+      end
+    }
 
     -- file tree
     use {
@@ -189,6 +211,10 @@ packer.startup(function ()
     -- lsp
     use {
         'neovim/nvim-lspconfig',
+    }
+
+    use {
+      'simrat39/rust-tools.nvim'
     }
 
     -- highlight other uses of the word under the cursor
@@ -285,6 +311,12 @@ packer.startup(function ()
         --after = 'cmp-nvim-lua',
     }
 
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
+
+    use 'hrsh7th/cmp-vsnip'
+
+    use 'hrsh7th/vim-vsnip'
+
     use {
         'hrsh7th/cmp-buffer',
         --after = 'cmp-nvim-lsp',
@@ -337,4 +369,12 @@ packer.startup(function ()
         end,
     }
 
+    use 'rust-lang/rust.vim'
+
+    use {
+      'numToStr/Comment.nvim',
+      config = function()
+        require'Comment'.setup()
+      end
+    }
 end)

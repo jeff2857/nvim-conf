@@ -18,6 +18,8 @@ keymap.map('n', '<Leader>7', '7gt')
 keymap.map('n', '<Leader>8', '8gt')
 keymap.map('n', '<Leader>9', '9gt')
 keymap.map('n', '<Leader>0', ':tablast<CR>')
+keymap.map('n', '<Leader>n', ':tabnext<CR>')
+keymap.map('n', '<Leader>p', ':tabprevious<CR>')
 
 -- quit
 keymap.map('n', '<Leader>q', ':q<CR>')
