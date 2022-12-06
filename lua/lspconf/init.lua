@@ -13,28 +13,39 @@ end
 local api = vim.api
 
 
--- how diagnostic displayed
-vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = true,
-    severity_sort = false,
-})
 
 
 -- diagnostic symbols
 local signs = {
-    Error = ' ',
-    Warn = ' ',
-    Hint = ' ',
-    Info = ' ',
+  Error = ' ',
+  Warn = ' ',
+  Hint = ' ',
+  Info = ' ',
 }
 for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+-- how diagnostic displayed
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  severity_sort = false,
+  float = {
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
+})
+
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
 
 -- print diagnostics to message area
 function PrintDiagnostics(opts, bufnr, line_nr, client_id)
@@ -109,27 +120,38 @@ end
 
 -- load lsp servers
 -- rust
-lspconfig['rust_analyzer'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-        debounce_text_changes = 150,
-    },
-    settings = {
-        ["rust-analyzer"] = {
-            assist = {
-                importGranularity = 'module',
-                importPrefix = 'self',
-            },
-            cargo = {
-                loadOutDirsFromCheck = true,
-            },
-            procMacro = {
-                enable = true,
-            },
-        }
-    }
-}
+local present, rt = pcall(require, 'rust-tools')
+if not present then
+  return
+end
+
+rt.setup({
+  server = {
+    on_attach = function(client, bufnr)
+      -- highlight symbol under cursor
+      -- require'illuminate'.on_attach(client)
+      --
+      -- -- Enable completion triggered by <c-x><c-o>
+      -- api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+      -- api.nvim_buf_set_option(0, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+      --
+      -- local bufopts = { noremap = true, silent = true, buffer = bufnr }
+      --
+      -- keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+      -- keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+      -- keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+      -- keymap.set('n', 'gs', vim.lsp.buf.signature_help, bufopts)
+      -- keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
+      -- keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+      -- keymap.set('n', 'gf', vim.lsp.buf.formatting, bufopts)
+      -- keymap.set('n', '<leader>r', vim.lsp.buf.rename, bufopts)
+      keymap.set('n', '<leader>a', rt.code_action_group.code_action_group, bufopts)
+      -- keymap.set('n', '<leader>e', vim.diagnostic.open_float, bufopts)
+      keymap.set('n', 'K', rt.hover_actions.hover_actions, bufopts)
+      api.nvim_buf_set_keymap(bufnr, 'n', '<leader>i', '<cmd>LspInfo<CR>', opts)
+    end,
+  },
+})
 
 -- solidity
 --lspconfig['solc'].setup{

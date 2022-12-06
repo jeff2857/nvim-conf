@@ -69,13 +69,6 @@ opt.ignorecase = true
 opt.splitbelow = true
 opt.splitright = true
 
--- autocomplete
-opt.completeopt = {'menuone', 'noselect', 'noinsert'}
-
-vim.cmd([[
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focusable = false})
-]])
-
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 -- statusline
@@ -338,12 +331,6 @@ packer.startup(function ()
     use {
         'rafamadriz/friendly-snippets',
         --event = 'InsertEnter',
-    }
-
-    use {
-        'L3MON4D3/LuaSnip',
-        --wants = 'friendly-snippets',
-        --after = 'nvim-cmp',
     }
 
     use {

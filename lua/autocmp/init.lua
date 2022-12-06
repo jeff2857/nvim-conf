@@ -4,27 +4,10 @@ if not present then
     return
 end
 
-local present, luasnip = pcall(require, 'luasnip')
-
-if not present then
-    return
-end
-
 local present, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
 if not present then
     return
 end
-
-local present, lspconfig = pcall(require, 'lspconfig')
-if not present then
-    return
-end
-
-local present, luasnip = pcall(require, 'luasnip')
-if not present then
-    return
-end
-
 
 vim.opt.completeopt = 'menuone,noinsert,noselect'
 
@@ -68,21 +51,13 @@ cmp.setup {
     },
     sources = {
       {name = 'path'},
-        {name = 'nvim_lsp', keyword_length = 3},
-        {name = 'vsnip', keyword_length = 2},
-        {name = 'buffer', keyword_length = 2},
+        {name = 'nvim_lsp'},
+        {name = 'vsnip'},
+        {name = 'buffer'},
         {name = 'calc'},
         {name = 'nvim_lua'},
         {name = 'path'},
         {name = 'nvim_lsp_signature_help'},
     },
 }
-
-
-luasnip.config.set_config {
-    history = true,
-    updateevents = 'TextChanged,TextChangedI',
-}
-
-require('luasnip/loaders/from_vscode').load()
 

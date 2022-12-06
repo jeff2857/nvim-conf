@@ -6,6 +6,7 @@ end
 
 require'nvim-treesitter'.setup {
     ensure_installed = {'lua', 'rust', 'toml'},
+    auto_install = true,
     highlight = {
         enable = true,
         use_languagetree = true,
@@ -16,5 +17,10 @@ require'nvim-treesitter'.setup {
         extended_mode = true,
         max_file_lines = nil,
     },
+    rainbow = {
+      enable = true,
+      extended_mode = true,
+      max_file_lines = nil,
+    }
 }
 
